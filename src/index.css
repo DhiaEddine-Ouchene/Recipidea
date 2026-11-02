@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme{
+  /* ===== Colors ===== */
+ --color-surface: #fcf9f8;
+ --color-surface-dim: #dcd9d9;
+ --color-surface-bright: #fcf9f8;
+ --color-surface-container-lowest: #ffffff;
+ --color-surface-container-low: #f6f3f2;
+ --color-surface-container: #f0eded;
+ --color-surface-container-high: #eae7e7;
+ --color-surface-container-highest: #e4e2e1;
+ --color-on-surface: #1b1c1c;
+ --color-on-surface-variant: #564338;
+ --color-inverse-surface: #303030       ;
+ --color-inverse-on-surface:#f3f0f0;
+ --color-outline: #897266;
+ --color-outline-variant: #ddc1b3;
+ --color-surface-tint: #9b4500;
+ --color-primary: #9b4500;
+ --color-on-primary: #ffffff;
+ --color-primary-container: #ff8c42;
+ --color-on-primary-container: #6a2d00;
+ --color-inverse-primary: #ffb68d ;  
+ --color-secondary: #006e1c;
+ --color-on-secondary: #ffffff;
+ --color-secondary-container: #91f78e;
+ --color-on-secondary-container: #00731e;
+ --color-tertiary: #5e5e5c;
+ --color-on-tertiary: #ffffff;
+ --color-tertiary-container: #abaaa7;
+ --color-on-tertiary-container: #3e3f3c;
+ --color-error: #ba1a1a;
+ --color-on-error: #ffffff;
+ --color-error-container: #ffdad6;
+ --color-on-error-container: #93000a;
+ --color-primary-fixed: #ffdbc9;
+ --color-primary-fixed-dim: #ffb68d;
+ --color-on-primary-fixed: #331200;
+ --color-on-primary-fixed-variant: #763300;
+ --color-secondary-fixed: #94f990;
+ --color-secondary-fixed-dim: #78dc77;
+ --color-on-secondary-fixed: #002204;
+ --color-on-secondary-fixed-variant: #005313;
+ --color-tertiary-fixed: #e4e2de;
+ --color-tertiary-fixed-dim: #c8c6c3;
+ --color-on-tertiary-fixed: #1b1c1a;
+ --color-on-tertiary-fixed-variant: #474744;
+ --color-background: #fcf9f8;
+ --color-on-background: #1b1c1c;
+ --color-surface-variant: #e4e2e1;
+
+ /* ===== Fonts ====== */
+ --font-sans : 'Geist' ,sans-serif ;
+
+  /* ===== Rounded corner ====== */
+  --radius-sm: 0.25rem;
+  --radius-DEFAULT: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --spacing-container-max: 1200px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --breakpoint-9x : 901px
+
+}
+
+
+@font-face {
+  font-family: 'Geist';
+  src: url(/fonts/Geist/Geist-Black.ttf);
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url(/fonts/Geist/Geist-ExtraBold.ttf);
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url(/fonts/Geist/Geist-Bold.ttf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url(/fonts/Geist/Geist-SemiBold.ttf);
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url(/fonts/Geist/Geist-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url(/fonts/Geist/Geist-Regular.ttf);
+  font-weight: 400;
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MealMate - Favorites</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#78dc77",
+                        "tertiary": "#5e5e5c",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f0eded",
+                        "tertiary-container": "#abaaa7",
+                        "secondary-container": "#91f78e",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "surface-variant": "#e4e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "outline": "#897266",
+                        "on-secondary-fixed-variant": "#005313",
+                        "tertiary-fixed": "#e4e2de",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474744",
+                        "primary": "#9b4500",
+                        "inverse-primary": "#ffb68d",
+                        "on-primary-fixed": "#331200",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006e1c",
+                        "background": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#763300",
+                        "primary-container": "#ff8c42",
+                        "on-tertiary-fixed": "#1b1c1a",
+                        "on-secondary-fixed": "#002204",
+                        "inverse-surface": "#303030",
+                        "surface-tint": "#9b4500",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface": "#fcf9f8",
+                        "surface-container-highest": "#e4e2e1",
+                        "secondary-fixed": "#94f990",
+                        "surface-dim": "#dcd9d9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#564338",
+                        "primary-fixed": "#ffdbc9",
+                        "outline-variant": "#ddc1b3",
+                        "on-secondary-container": "#00731e",
+                        "surface-container-low": "#f6f3f2",
+                        "primary-fixed-dim": "#ffb68d",
+                        "tertiary-fixed-dim": "#c8c6c3",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#3e3f3c",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#6a2d00",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "xxl": "48px",
+                        "container-max": "1200px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .soft-shadow {
+            box-shadow: 0px 4px 20px rgba(45, 45, 45, 0.05);
+        }
+        .deep-shadow {
+            box-shadow: 0px 12px 32px rgba(45, 45, 45, 0.08);
+        }
+        .recipe-card-img {
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar (Generated from JSON) -->
+<nav class="bg-surface-bright dark:bg-surface-dim shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-lg py-md w-full max-w-container-max mx-auto">
+<!-- Brand -->
+<a class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed" href="#">MealMate</a>
+<!-- Search (on_left implies before nav, but visually integrating into the flow) -->
+<div class="hidden md:flex items-center flex-1 max-w-md mx-lg">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-surface-variant rounded-full focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant" placeholder="Search" type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center space-x-lg">
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary-container transition-colors duration-200" href="#">Home</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary pb-1 hover:text-primary-container transition-colors duration-200" href="#">Favorites</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary-container transition-colors duration-200" href="#">Meal Planner</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-md ml-auto md:ml-0">
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="scale-95 active:opacity-80 transition-all rounded-full overflow-hidden border-2 border-transparent hover:border-primary">
+<img alt="User avatar" class="w-8 h-8 object-cover" data-alt="A small circular profile picture of a smiling young woman with dark hair, set against a bright, softly lit white background to match a clean minimalist UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeXifxqjDv7P7BhHQSF5VpxlDVpc7XmId3WP7Qu-JAb4mvT9MXuPLvX_H0FlyW--pnfxP_zLS3mn4ErRQfK7Cs6KpmcxObpmHuj5_RFzMk0Cy-Xl6-K1YDCdCeE5gGzdUjvpfPFqXc8lhLOyL9MfFPyS68AjAHNDED4VIM2fNdAYZFGeiATtPg5FKo7C6KX0k4wJG54EtVl-zRb5zo0rB53XLPHBQ7lOBCuCSSwC6ycZL2SGKzmqI"/>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-lg py-xl">
+<!-- Header Section -->
+<header class="mb-xl text-center md:text-left">
+<h1 class="font-display-lg text-display-lg text-on-background mb-sm">Your Favorite Recipes</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A collection of your most-loved meals.</p>
+</header>
+<!-- Categories / Folders (Bento-style layout for folders) -->
+<section class="mb-xl">
+<div class="flex flex-wrap gap-md">
+<button class="px-md py-sm rounded-full bg-surface-container-lowest border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">folder</span>
+                    Quick Meals
+                </button>
+<button class="px-md py-sm rounded-full bg-surface-container-lowest border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">folder</span>
+                    Weekend Dinners
+                </button>
+<button class="px-md py-sm rounded-full bg-surface-container-lowest border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">folder</span>
+                    Healthy
+                </button>
+<button class="px-md py-sm rounded-full border border-dashed border-outline-variant font-label-md text-label-md text-on-surface-variant hover:text-primary hover:border-primary transition-colors flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    New Folder
+                </button>
+</div>
+</section>
+<!-- Recipe Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Recipe Card 1 -->
+<article class="bg-surface-container-lowest rounded-2xl soft-shadow overflow-hidden group relative flex flex-col transform transition-transform hover:-translate-y-1 duration-300">
+<div class="relative w-full h-48 overflow-hidden">
+<img alt="Sweet Potato Grain Bowl" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A beautifully plated warm grain bowl with roasted sweet potatoes, quinoa, fresh greens, and a creamy tahini dressing, photographed from directly above in bright, diffused natural light to highlight textures and vibrant colors. Minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm0aK0WqK_xOAwxCRAUYFIs7rhTQhoHddKPL1dZF_zwNSFX_YyJ1PWY5p8o47zTR3zYZHJGUX7nVjUwNlqNWaJcy9NvleZZm46m4s_v3mQUo2U4ty0PwvngpOUn4WVnRJb62q5U4_metT2glgxAvlIynBLwXe_69l7pi9r3i_PivxCHNIv-QpPW_QhXv-eXQ0dnSovtJadGubCSI_YaPtUYHkjoCTCKxCDfFPRZ1OIBu-6gM9iITY"/>
+<button aria-label="Remove from favorites" class="absolute top-sm right-sm p-sm bg-surface-container-lowest/80 backdrop-blur-sm rounded-full text-primary hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-sm left-sm flex gap-xs">
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm backdrop-blur-md bg-opacity-90">Healthy</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs line-clamp-2">Roasted Sweet Potato Grain Bowl</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">A nourishing bowl packed with complex carbs and a tangy tahini dressing.</p>
+</div>
+<div class="mt-md flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined" style="font-size: 16px;">schedule</span> 30 min</span>
+</div>
+</div>
+</article>
+<!-- Recipe Card 2 -->
+<article class="bg-surface-container-lowest rounded-2xl soft-shadow overflow-hidden group relative flex flex-col transform transition-transform hover:-translate-y-1 duration-300">
+<div class="relative w-full h-48 overflow-hidden">
+<img alt="Classic Shakshuka" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A rustic cast iron skillet filled with bubbling shakshuka, eggs perfectly poached in a rich red tomato sauce with herbs, resting on a clean wooden table. Top-down view, soft morning light creating gentle shadows. Minimalist, appetizing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm5Xw0o6IELJ3i1wAy4pgajWsshRwQqPzfAIF-CXSm18uib9r-MqWfcS4Iq4VFraXSfrUPKjUx0Fj0aBTDYwsuEKO4AxPkCoJEJzeFcbtQDLtLFCTEmHGloDNoRIEQseNKL6njEnB970dopucJF3tHwJQS_GbizvrTtXt50wmvVyXN2EO3GHqiXTDp3ElYL1HIbH-mKelDh4mn2wswGHIrwAYXXutB2cDbJ2vqkkZsslV8GCzidr0"/>
+<button aria-label="Remove from favorites" class="absolute top-sm right-sm p-sm bg-surface-container-lowest/80 backdrop-blur-sm rounded-full text-primary hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-sm left-sm flex gap-xs">
+<span class="bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm backdrop-blur-md bg-opacity-90">Weekend Dinners</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs line-clamp-2">Classic Spiced Shakshuka</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Eggs poached in a hearty, spiced tomato and pepper sauce.</p>
+</div>
+<div class="mt-md flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined" style="font-size: 16px;">schedule</span> 45 min</span>
+</div>
+</div>
+</article>
+<!-- Recipe Card 3 -->
+<article class="bg-surface-container-lowest rounded-2xl soft-shadow overflow-hidden group relative flex flex-col transform transition-transform hover:-translate-y-1 duration-300">
+<div class="relative w-full h-48 overflow-hidden">
+<img alt="Avocado Pesto Pasta" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek white ceramic bowl containing a vibrant green avocado pesto pasta, garnished with cherry tomatoes and basil leaves. High contrast, clean lighting emphasizing the fresh, healthy ingredients on a light marble surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfVAkSGiULQ5_LDHwdA16FV4BCQdiCY6pmdKI5Zo7qfnpUzdYUcdzFUSo8YlY28BeZnJwg4nNje0OllRI8RKeWLU9FUta9MeN0B4kSfWcy5Uo5pCqo-nuM-2eTPHLoVu4DG5LUYgLcbi3_LJsRZ_1mAu9LBlqGtrslE2R2eghiLqupgvEuQfLgzMMSwZkrXNnIytyZ3ws2jDlsXzr_nowmEgQaLdTVSt_0ResDgrEOomQzYLOcR5s"/>
+<button aria-label="Remove from favorites" class="absolute top-sm right-sm p-sm bg-surface-container-lowest/80 backdrop-blur-sm rounded-full text-primary hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-sm left-sm flex gap-xs">
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm backdrop-blur-md bg-opacity-90">Quick Meals</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs line-clamp-2">Creamy Avocado Pesto Pasta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">A quick, 15-minute dinner using ripe avocados for a rich, dairy-free sauce.</p>
+</div>
+<div class="mt-md flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined" style="font-size: 16px;">schedule</span> 15 min</span>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Footer (Generated from JSON) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-highest border-t border-outline-variant full-width bottom-0 mt-xxl">
+<div class="flex flex-col md:flex-row justify-between items-center py-xl px-lg max-w-container-max mx-auto space-y-lg md:space-y-0">
+<!-- Brand & Copyright -->
+<div class="flex flex-col items-center md:items-start text-center md:text-left">
+<span class="font-headline-md text-headline-md text-primary mb-xs">MealMate</span>
+<span class="font-body-md text-body-md text-tertiary dark:text-tertiary-fixed-dim">© 2024 MealMate. All rights reserved.</span>
+</div>
+<!-- Footer Links -->
+<div class="flex flex-wrap justify-center gap-md font-label-sm text-label-sm">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">About</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Recipes</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

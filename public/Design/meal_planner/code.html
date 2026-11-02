@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meal Planner - MealMate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#78dc77",
+                        "tertiary": "#5e5e5c",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f0eded",
+                        "tertiary-container": "#abaaa7",
+                        "secondary-container": "#91f78e",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "surface-variant": "#e4e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "outline": "#897266",
+                        "on-secondary-fixed-variant": "#005313",
+                        "tertiary-fixed": "#e4e2de",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474744",
+                        "primary": "#9b4500",
+                        "inverse-primary": "#ffb68d",
+                        "on-primary-fixed": "#331200",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006e1c",
+                        "background": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#763300",
+                        "primary-container": "#ff8c42",
+                        "on-tertiary-fixed": "#1b1c1a",
+                        "on-secondary-fixed": "#002204",
+                        "inverse-surface": "#303030",
+                        "surface-tint": "#9b4500",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface": "#fcf9f8",
+                        "surface-container-highest": "#e4e2e1",
+                        "secondary-fixed": "#94f990",
+                        "surface-dim": "#dcd9d9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#564338",
+                        "primary-fixed": "#ffdbc9",
+                        "outline-variant": "#ddc1b3",
+                        "on-secondary-container": "#00731e",
+                        "surface-container-low": "#f6f3f2",
+                        "primary-fixed-dim": "#ffb68d",
+                        "tertiary-fixed-dim": "#c8c6c3",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#3e3f3c",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#6a2d00",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "xxl": "48px",
+                        "container-max": "1200px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #fcf9f8; }
+        .shadow-ambient { box-shadow: 0px 4px 20px rgba(45, 45, 45, 0.05); }
+        .shadow-lift { box-shadow: 0px 12px 32px rgba(45, 45, 45, 0.08); }
+        .draggable-card:active { transform: scale(0.98); cursor: grabbing; }
+        .draggable-card { cursor: grab; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .draggable-card:hover { box-shadow: 0px 8px 24px rgba(45, 45, 45, 0.06); }
+    </style>
+</head>
+<body class="text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface-bright shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-lg py-md w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-lg">
+<a class="font-headline-lg text-headline-lg font-bold text-primary" href="#">MealMate</a>
+<div class="hidden md:flex gap-md ml-lg">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors duration-200" href="#">Favorites</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary-container transition-colors duration-200" href="#">Meal Planner</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary-container transition-colors duration-200 scale-95 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-container transition-colors duration-200 scale-95 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<img alt="User avatar" class="w-10 h-10 rounded-full object-cover shadow-ambient cursor-pointer" data-alt="A high-quality, professional headshot of a smiling user in their modern kitchen, soft natural lighting, light and airy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwNSuE38eldug250IY--A8ig23SNSKg-ilLPUqUuPOzt8emskrOI2SsYccDRkEfGlFnRrCTapMiBkKGCsjQERCL0uAq5rELpl-xBlvu8UkR4zY8m1fK2a9xSm8fwK48oCeRmB6E6j5nv_TI2S_C8nBRuvph4YdqEr5Rim0Xd7PcqZYRW5lpRyLg7OCpLoQDRCN-puhB2B_QjjXST1C4aWEwJlGRgk1wIXNt3dXYzZVN2JlIqt3o5Y"/>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-lg py-xl flex flex-col lg:flex-row gap-gutter">
+<!-- Left: Calendar View -->
+<section class="flex-1 flex flex-col gap-lg">
+<!-- Header -->
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Meal Planner</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Week of Oct 14 - Oct 20</p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-surface-container-lowest text-on-surface border border-outline font-label-md text-label-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors duration-200 active:scale-95">Clear Week</button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg shadow-ambient hover:opacity-90 transition-opacity duration-200 active:scale-95 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">list_alt</span> Generate List
+                    </button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient border border-surface-variant overflow-hidden">
+<div class="grid grid-cols-8 divide-x divide-surface-variant">
+<!-- Time Column -->
+<div class="bg-surface-container-low flex flex-col divide-y divide-surface-variant font-label-sm text-label-sm text-on-surface-variant text-center">
+<div class="h-12 flex items-center justify-center bg-surface-container"></div>
+<div class="h-32 flex items-center justify-center p-sm">Breakfast</div>
+<div class="h-32 flex items-center justify-center p-sm">Lunch</div>
+<div class="h-32 flex items-center justify-center p-sm">Dinner</div>
+</div>
+<!-- Monday -->
+<div class="flex flex-col divide-y divide-surface-variant">
+<div class="h-12 flex flex-col items-center justify-center bg-surface-container">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mon</span>
+<span class="font-headline-md text-headline-md text-on-surface">14</span>
+</div>
+<div class="h-32 p-xs relative bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer group">
+<!-- Empty Slot -->
+<div class="absolute inset-2 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline-variant">add</span>
+</div>
+</div>
+<div class="h-32 p-xs relative">
+<!-- Filled Slot -->
+<div class="w-full h-full bg-surface-container-lowest rounded-lg shadow-sm border border-surface-variant overflow-hidden flex flex-col cursor-pointer hover:shadow-ambient transition-shadow">
+<img class="h-16 w-full object-cover" data-alt="A beautifully plated quinoa salad bowl with fresh avocado, cherry tomatoes, and a light citrus dressing. Shot from directly above in bright, natural light on a clean marble surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcH7g9DV1g4IiObby0kfJ6DaUrJwJN1Dh42k2GHTauubDDLDadPIc4-K8p931lfEE-AX6asDUyz3i9ef__hUTpPaUo8IJsyECD9-Ggdlu8HDcni_EpWqJ_qTjzXDmmG9OUdvMfld2-sTDqaxj7VgIoO6rhSc0mVfcIoCckcQLLUQFKUzoQKa_cQW-qK2MVxy9yE49ynpbsob91TTA-jMkpuUP4TenrqD9QUtZz2oYl7oEa941yL9w"/>
+<div class="p-xs">
+<p class="font-label-sm text-label-sm text-on-surface truncate">Quinoa Salad</p>
+</div>
+</div>
+</div>
+<div class="h-32 p-xs relative bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="absolute inset-2 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline-variant">add</span>
+</div>
+</div>
+</div>
+<!-- Tuesday (Repeat structure) -->
+<div class="flex flex-col divide-y divide-surface-variant">
+<div class="h-12 flex flex-col items-center justify-center bg-surface-container">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tue</span>
+<span class="font-headline-md text-headline-md text-on-surface">15</span>
+</div>
+<div class="h-32 p-xs relative bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="absolute inset-2 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline-variant">add</span>
+</div>
+</div>
+<div class="h-32 p-xs relative bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="absolute inset-2 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline-variant">add</span>
+</div>
+</div>
+<div class="h-32 p-xs relative">
+<div class="w-full h-full bg-surface-container-lowest rounded-lg shadow-sm border border-surface-variant overflow-hidden flex flex-col cursor-pointer hover:shadow-ambient transition-shadow">
+<img class="h-16 w-full object-cover" data-alt="A comforting bowl of creamy tomato soup served with a rustic grilled cheese sandwich on a wooden table. Warm, inviting lighting emphasizing the textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAJ-05pcGvjUceKeZNP0u9FIvKpsD5EKfTwXBx4Izpr32IqdgXMvDxmEVVoaVwIGu3gC0raCfFZ2x7D-E1KMEIixPmrjDdJB9eD_TsDBgB8cNlPx-lHQGlU03nNr5GFgZoEgBTWK_vErbDpmW36DX4IcHiJQjV1VeIAqC4ip7LakSbrsQRs63nmtFhWmlb--kIXKw4J7x076oiXtK5dDOG7jaOrar8hpxvVcV4Iwwj_2Ypzm0ubrA"/>
+<div class="p-xs">
+<p class="font-label-sm text-label-sm text-on-surface truncate">Tomato Soup</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Wednesday -->
+<div class="flex flex-col divide-y divide-surface-variant bg-surface-container-low/30">
+<div class="h-12 flex flex-col items-center justify-center bg-primary-fixed/20 border-b-2 border-primary">
+<span class="font-label-sm text-label-sm text-primary uppercase">Wed</span>
+<span class="font-headline-md text-headline-md text-primary">16</span>
+</div>
+<div class="h-32 p-xs relative">
+<div class="w-full h-full bg-surface-container-lowest rounded-lg shadow-sm border border-surface-variant overflow-hidden flex flex-col cursor-pointer hover:shadow-ambient transition-shadow">
+<img class="h-16 w-full object-cover" data-alt="Overnight oats topped with fresh berries, chia seeds, and a drizzle of honey in a glass jar. Soft morning light in a modern kitchen setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmCG94xMPj1ORdKRl6tvMyFXH3L8UQs11cSYEuB36Pz-hNDtvFp-ZScZqlYPmjJcAyOtQxOITqk_pzRYHPe6n9GhORluRxxFT4ybCim02uw5p-gIBc1XDaCJfAKHS5flq9pq4l3zgVLoudEps65ZHT8UItBxafQ-f-PYHhYG5HiQ_SLDjxysNn-9NZoto06UstLrX16i-bfTcQJA2gkdIUd_RVbq7lcSbdTv5lEEn1hkgM7jEGFvI"/>
+<div class="p-xs">
+<p class="font-label-sm text-label-sm text-on-surface truncate">Berry Oats</p>
+</div>
+</div>
+</div>
+<div class="h-32 p-xs relative bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="absolute inset-2 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline-variant">add</span>
+</div>
+</div>
+<div class="h-32 p-xs relative bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="absolute inset-2 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline-variant">add</span>
+</div>
+</div>
+</div>
+<!-- Thursday-Sunday placeholders for visual completeness -->
+<div class="flex flex-col divide-y divide-surface-variant"><div class="h-12 flex flex-col items-center justify-center bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Thu</span><span class="font-headline-md text-headline-md text-on-surface">17</span></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div></div>
+<div class="flex flex-col divide-y divide-surface-variant"><div class="h-12 flex flex-col items-center justify-center bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Fri</span><span class="font-headline-md text-headline-md text-on-surface">18</span></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div></div>
+<div class="flex flex-col divide-y divide-surface-variant"><div class="h-12 flex flex-col items-center justify-center bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Sat</span><span class="font-headline-md text-headline-md text-on-surface">19</span></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div></div>
+<div class="flex flex-col divide-y divide-surface-variant"><div class="h-12 flex flex-col items-center justify-center bg-surface-container"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Sun</span><span class="font-headline-md text-headline-md text-on-surface">20</span></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div><div class="h-32 bg-surface-bright/50"></div></div>
+</div>
+</div>
+</section>
+<!-- Right: Sidebar (Saved Recipes) -->
+<aside class="w-full lg:w-80 flex flex-col gap-md h-[calc(100vh-140px)] sticky top-[90px]">
+<div class="bg-surface-container-lowest rounded-xl shadow-ambient p-md flex flex-col h-full border border-surface-variant">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Saved Recipes</h2>
+<div class="relative mb-md">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-bright border border-surface-variant rounded-lg pl-xl py-sm font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed focus:outline-none transition-all" placeholder="Search recipes..." type="text"/>
+</div>
+<div class="flex-1 overflow-y-auto pr-sm space-y-md custom-scrollbar">
+<!-- Recipe Card 1 -->
+<div class="draggable-card bg-surface-container-lowest rounded-lg border border-surface-variant flex gap-sm p-sm shadow-sm">
+<img class="w-16 h-16 rounded-md object-cover" data-alt="A vibrant green avocado toast on artisan sourdough bread, topped with chili flakes and a perfectly poached egg. Clean, bright aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtWs4yw_Owe5yBwAHNcHgHlgedcnG0Ny_S6nN-N-3oeNxQSoPnJhs8F5__7Kr_0V01AlW7lc76eQabMLQQHTP8R3UNfs9Gdb1xR_l30p9vYKY13YOlxJgmqPT2zNL8pZA3J0cuwk64V3nkq4eur682gbfq04Tvj1MJIcQLSFIY3bFcqK3KOf1sAAda1-OJLS2NHe8ypYh-5dXcmbzaOztcQtzEHJ4nIn-XBN4yhkhge8rj2JbXBk4"/>
+<div class="flex flex-col justify-center">
+<h3 class="font-label-md text-label-md text-on-surface">Avocado Toast</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Breakfast • 15m</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant ml-auto self-center cursor-grab">drag_indicator</span>
+</div>
+<!-- Recipe Card 2 -->
+<div class="draggable-card bg-surface-container-lowest rounded-lg border border-surface-variant flex gap-sm p-sm shadow-sm">
+<img class="w-16 h-16 rounded-md object-cover" data-alt="A sizzling pan of garlic butter salmon fillets garnished with fresh herbs and lemon wedges. Rich colors, warm and appetizing lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwLK-nyhAe8u7GWLTs6rFT9JK3ZrEv_-bR8hbSMxGAZ1qi6pLJohihgPqJL0Fu052PE37qobrIW4Y7nhfrb85Ko7YA_nc7c3tJcKso4ut0HR9sVUAqv9vCKgxKfpgnbBEXuKdDuNc6MpTg1_pwLkd3L7Ls85P-TUimb3rbozuJYvjS0fynroJ9zH2suYY7mG5Bkgmd5iZ4D8R2tBpjhRxwDAM0M0-GU6IghIQVNajPFBX5EPLLfo0"/>
+<div class="flex flex-col justify-center">
+<h3 class="font-label-md text-label-md text-on-surface">Garlic Salmon</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Dinner • 25m</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant ml-auto self-center cursor-grab">drag_indicator</span>
+</div>
+<!-- Recipe Card 3 -->
+<div class="draggable-card bg-surface-container-lowest rounded-lg border border-surface-variant flex gap-sm p-sm shadow-sm">
+<img class="w-16 h-16 rounded-md object-cover" data-alt="A fresh, colorful Mediterranean pasta salad in a ceramic bowl, featuring olives, feta cheese, and cherry tomatoes. Bright, clean lifestyle photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3XKyKxP-7gou9iDohIe4M5vweZ16AFoTHnOyyfNc1oF4_u0XD88HXQbY4G1AtZDrpOni_0pYYhyD1xpSs7xyHKXkm7CADryuVtyQPh4mSDq9Hij7xFG94IZCKbe28UUauvneaAoCvJ7wEatRdjqXr24qGxI6SvD0sGP-dNoO3kQA72lSJDDgLNGaKI47kzFuYqgfei7TYqVh0PJLcvrDPwlqGk7MOd9BxjDpuDR0PvrzCZKbUgRU"/>
+<div class="flex flex-col justify-center">
+<h3 class="font-label-md text-label-md text-on-surface">Pasta Salad</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Lunch • 20m</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant ml-auto self-center cursor-grab">drag_indicator</span>
+</div>
+<!-- Recipe Card 4 -->
+<div class="draggable-card bg-surface-container-lowest rounded-lg border border-surface-variant flex gap-sm p-sm shadow-sm">
+<img class="w-16 h-16 rounded-md object-cover" data-alt="A hearty bowl of lentil stew with carrots and celery, served with a side of crusty bread. Warm, rustic, comforting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIkWbLHF7Kp9jxVFDSudn_KtgdvAU2QHgeFiDalNZabdaf-_poU9mDwPNtdYNvP_RVox00vVnmD18P400xEnS1aWIToynHxqzd_qda5Zr2QFqyJrPnAUtNd0aOz9nhDtvy5orKULx--IMupSGPBRb3vgfSZ1hGkfhFH6vL6B-wdrrXawO4e1ywTBaSvQSDX-e0qycRuhSP0BItkCTA1sdMq0nCtmhKGIUnjprL8ryHBZnh0doRZO4"/>
+<div class="flex flex-col justify-center">
+<h3 class="font-label-md text-label-md text-on-surface">Lentil Stew</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Dinner • 45m</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant ml-auto self-center cursor-grab">drag_indicator</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant full-width bottom-0 mt-xxl">
+<div class="flex flex-col md:flex-row justify-between items-center py-xl px-lg max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-primary mb-md md:mb-0">MealMate</div>
+<div class="flex flex-wrap justify-center gap-md font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">About</a>
+<a class="hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Recipes</a>
+<a class="hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+<div class="font-body-md text-body-md text-tertiary mt-md md:mt-0">© 2024 MealMate. All rights reserved.</div>
+</div>
+</footer>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #dcd9d9; border-radius: 4px; }
+    </style>
+</body></html>
