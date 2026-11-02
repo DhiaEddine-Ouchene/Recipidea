@@ -180,7 +180,7 @@ export default function Home() {
         <span className="text-white font-regular">
           Discover recipes from around the world.
         </span>
-        <div className=" w-[clamp(400px,50vw,700px)] bg-white flex rounded-DEFAULT items-center ">
+        <div className=" w-[clamp(300px,50vw,700px)] line-clamp-1 bg-white flex rounded-DEFAULT items-center ">
           <SearchIcon className="ml-2 text-primary"></SearchIcon>
           <input
             type="text"
@@ -194,8 +194,8 @@ export default function Home() {
                 fetchMeals(activeCuisine,activeCategory)
               }
             }}
-            className="bg-white flex-1 p-2.5 focus:outline-0 placeholder:text-outline/60 rounded-DEFAULT"
-            placeholder="Search by ingredients,dish name , or chef..."
+            className="bg-white flex-1 p-2.5 truncate focus:outline-0 placeholder:text-outline/60 rounded-DEFAULT"
+            placeholder="Search by meal name"
           />
           {/* <button onClick={} className="bg-primary-container text-on-primary-container font-bold px-4 py-1.5 rounded-[8px] m-2 cursor-pointer">
             Search

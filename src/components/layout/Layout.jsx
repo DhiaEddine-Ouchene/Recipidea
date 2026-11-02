@@ -5,7 +5,7 @@ export default function Layout(){
     return(
         <>
         <Navbar></Navbar>
-        <div className="bg-background">
+        <div className="">
                 <Outlet/>
 
         </div>

@@ -65,7 +65,7 @@ export default function Favorites() {
           A collection of your most-loved meals
         </span>
       </div>
-      <div className="m-8 flex gap-4 cursor-pointer">
+      <div className="m-8 flex  flex-wrap gap-4 cursor-pointer">
         {folders.map((f) => (
           <FolderCard
             

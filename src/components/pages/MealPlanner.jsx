@@ -4,14 +4,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useFolders } from "../../context/FoldersContext";
 import axios from "axios";
 import { closestCorners, useDraggable, useDroppable } from "@dnd-kit/core";
-import { DndContext } from "@dnd-kit/core";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
-
-
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 export default function MealPlanner() {
   const [focus, setFocus] = useState(false);
@@ -19,6 +22,12 @@ export default function MealPlanner() {
   const { folders } = useFolders();
   const [loading, setLoading] = useState();
   const [meals, setMeals] = useState([]);
+  const sensors = useSensors(
+  useSensor(MouseSensor, { activationConstraint: { distance: 8 } }),
+  useSensor(TouchSensor, {
+    activationConstraint: { delay: 200, tolerance: 8 },
+  }),
+);
   const [activeDay, setActiveDay] = useState(
     () => new Date().toString().split(" ")[0],
   );
@@ -79,8 +88,12 @@ export default function MealPlanner() {
     );
   }, [searchedMeal, meals]);
 
-  function clearWeek(){
-    setDays(days.map(d =>{return {...d , breakfast:null , lunch:null , dinner : null}}))
+  function clearWeek() {
+    setDays(
+      days.map((d) => {
+        return { ...d, breakfast: null, lunch: null, dinner: null };
+      }),
+    );
   }
 
   function handleDragEnd({ active, over }) {
@@ -94,20 +107,17 @@ export default function MealPlanner() {
     localStorage.setItem("days", JSON.stringify(newDays));
   }
 
-function handleDeleteMeal(id){
-    const [index , slot] = id.split("-") ;
-    const newDays =days.map((p,i)=> i === Number(index) ? {...p , [slot] : null} : p) ;
-    setDays(newDays) ;
-    localStorage.setItem("days", JSON.stringify(newDays)) ;
-
+  function handleDeleteMeal(id) {
+    const [index, slot] = id.split("-");
+    const newDays = days.map((p, i) =>
+      i === Number(index) ? { ...p, [slot]: null } : p,
+    );
+    setDays(newDays);
+    localStorage.setItem("days", JSON.stringify(newDays));
   }
 
-
   return (
-    <DndContext
-      modifiers={[restrictToWindowEdges]}
-      onDragEnd={handleDragEnd}
-    >
+    <DndContext modifiers={[restrictToWindowEdges]} onDragEnd={handleDragEnd} sensors={sensors}>
       <div className="px-6 py-8 grid grid-cols-6 lg:grid-cols-12 gap-6  ">
         <div className="col-span-6 lg:col-span-9">
           <div className="flex items-center justify-between mb-6 w-full">
@@ -326,20 +336,19 @@ function DraggableMeal({ meal }) {
   );
 }
 
-function DroppableMeal({ meal, id , handleDeleteMeal } ) {
+function DroppableMeal({ meal, id, handleDeleteMeal }) {
   const { isOver, setNodeRef } = useDroppable({
     id,
     data: { meal },
   });
 
-  
   return (
     <div
       className={`h-32 rounded-md ${isOver ? "bg-primary/20 " : ""}`}
       ref={setNodeRef}
     >
       {meal && (
-        <Link to={`/meals/${meal?.idMeal}`}  >
+        <Link to={`/meals/${meal?.idMeal}`}>
           {" "}
           <div
             className={`rounded-md overflow-hidden border border-surface-container-highest bg-background flex flex-col h-32 group`}
@@ -350,14 +359,19 @@ function DroppableMeal({ meal, id , handleDeleteMeal } ) {
                 alt="Meal image"
                 className=" object-cover object-center w-full h-full  "
               />
-              <button className="absolute transition-all -top-6 -right-6 group-hover:top-0 group-hover:right-0 cursor-pointer " onClick={(e)=>{e.preventDefault() ; handleDeleteMeal(id)}}>
-                <RemoveCircleIcon className="text-red-600 top-1 z-40   right-1 drop-shadow-md "  ></RemoveCircleIcon>
+              <button
+                className="absolute transition-all -top-6 -right-6 group-hover:top-0 group-hover:right-0 cursor-pointer "
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteMeal(id);
+                }}
+              >
+                <RemoveCircleIcon className="text-red-600 top-1 z-40   right-1 drop-shadow-md "></RemoveCircleIcon>
               </button>
-            
             </div>
             <div className="text-[clamp(12px,2vw,15px)] p-2 flex items-center h-1/2 leading-4  font-semibold text-on-background  ">
               <span className="line-clamp-2 ">{meal?.strMeal}</span>
-            </div> 
+            </div>
           </div>
         </Link>
       )}
